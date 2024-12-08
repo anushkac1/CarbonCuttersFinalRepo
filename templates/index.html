@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="content"> </div>
+   
+
+
+<h2>Books</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Age Demographic</th>
+                    <th> Action </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.age_demographic }}</td>            
+                     
+                        <td class="align-middle text-center" style="vertical-align: middle;">
+                            <input type="button" class="show-update-fields" value="Show Update Fields">
+                            <form type="hidden" class="update-form" method="POST" action="/updateBook">
+                                <input type="hidden" name="book.isbn" value="{{ book.isbn }}">
+                                <div class="update-fields" style="display: none;">
+                                    <input type="text" name="new_title" placeholder="New Title" value="{{ book.title }}">
+                                    <input type="text" name="new_genre" placeholder="New Genre"  value="{{ book.genre }}">
+                                    <input type="text" name="new_demographics" placeholder="New Age Demographics"  value="{{ book.age_demographic }}">                                    
+                                    <input type="submit" value="Update">
+                                </div>
+                            </form>
+                            <br>
+                            <form method="POST" action="/deleteBook">
+                            <input type="hidden" name="book_isbn" value="{{ book.isbn }}">
+                            <input type="submit" value="Delete">
+                        </form>
+                        </td>
+                </tr>
+            {% endfor %}
+
+                
+            </tbody>
+        </table>
+        <h1>Add New Book</h1>
+        <form method="POST" action="/addBook">
+            <input type="text" name="title" placeholder="Title" required><br>
+            <input type="text" name="genre" placeholder="Genre"><br>
+            <input type="text" name="demographics" placeholder="Age Demographics"><br>            
+            <input type="submit" value="Add Book" class="add-book-button">
+        </form>
+
+
+
+
+
+{% end block %}

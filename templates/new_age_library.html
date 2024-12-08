@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+function removeOptions(){
+    var select = document.getElementById('field_id');
+    var length = select.options.length;
+    for (i = length-1; i >= 0; i--) {
+    select.options[i] = null;
+    }
+}
+    function populateOptions() {
+        var fields = document.getElementById('field_id');
+        var selectedValue = document.getElementById('tableOptions').value;
+        
+        if (selectedValue == "Book"){    
+            removeOptions();    
+            fields.add(new Option('ISBN', 'isbn'));                                 
+            fields.add(new Option('Title', 'title')); 
+            fields.add(new Option('Genre', 'genre')); 
+            fields.add(new Option('Age Demographic ', 'agedemo'));    
+            
+        }         
+        if (selectedValue == "Author"){    
+            removeOptions();
+            fields.add(new Option('First Name', 'afname'));
+            fields.add(new Option('Last Name', 'alname'));
+            fields.add(new Option('ISBN', 'aisbn'));
+            fields.add(new Option('Author ID', 'authorid'));
+       }
+       if (selectedValue == "Patron"){    
+            removeOptions();
+            fields.add(new Option('First Name', 'pfname'));
+            fields.add(new Option('Last Name', 'plname'));
+            fields.add(new Option('Patron ID', 'patronid'));
+            fields.add(new Option('Email', 'pemail'));
+            fields.add(new Option('City', 'pcity'));
+            fields.add(new Option('State', 'pstate'));
+            fields.add(new Option('Street', 'pstreet'));
+            fields.add(new Option('Country', 'pcountry'));
+            fields.add(new Option('Zip Code', 'pzip_code'));
+
+       }
+       if (selectedValue == "Librarian"){    
+            removeOptions();
+            fields.add(new Option('Librarian ID', 'librarianid'));
+            fields.add(new Option('First Name', 'lfname'));
+            fields.add(new Option('Last Name', 'llname'));
+            fields.add(new Option('Email', 'lemail'));
+            fields.add(new Option('City', 'lcity'));
+            fields.add(new Option('State', 'lstate'));
+            fields.add(new Option('Street', 'lstreet'));
+            fields.add(new Option('Country', 'lcountry'));
+            fields.add(new Option('Zip Code', 'lzip_code'));
+       }
+
+       if (selectedValue == "TransactionHistory"){    
+            removeOptions();
+            fields.add(new Option('Transaction ID', 'transactionid'));
+            fields.add(new Option('ISBN', 'tisbn'));
+            fields.add(new Option('Librarian ID', 'tlibrarianid'));
+            fields.add(new Option('Patron ID', 'tpatronid'));
+            fields.add(new Option('Check-Out Date', 'checkout'));
+            fields.add(new Option('Due Date', 'duedate'));
+       }
+
+       
+    }
+    </script>
+
+{% endblock %}
+
+{% block body %}
+<div class="content"> </div>
+   
+<br>
+
+<table width="80%" align="center" style="background-color:rgb(146, 109, 78)">
+    <tr>
+        <td colspan="2" style="text-align:center"><h1><font color="brown">New Age Library</font></h1></td>
+    </tr>
+    <tr>
+        <td style="text-align:center">Patron View
+            <form method="POST" action="/patronView">
+                <input type="hidden" name="patron_view" value="patron_view">
+                <input type="submit" value="Patron View">
+            </form>
+
+        </td>
+        <td style="text-align:center">Librarian View
+            <form method="POST" action="/librarianView">
+                <input type="hidden" name="librarian_view" value="librarian_view">
+                <input type="submit" value="Librarian View">
+            </form>
+        </td>
+    </tr>
+    <tr>
+    <td colspan="2" style="text-align:center">Admin View
+        <form method="POST" action="/adminView">
+            <input type="hidden" name="admin_view" value="admin_view">
+            <input type="submit" value="Admin View">
+        </form>
+    </td>
+    </tr>
+</table>
+
+<hr style="height:2px;border-width:0;color:gray;background-color:rgb(128, 128, 128)">
+<tr>
+    <td colspan="2" style="text-align:center"><h1><font color="brown">Search</font></h1></td>
+</tr>
+<form method="POST" action="/searchTables">
+<table width= "100%" style="background-color:rgb(218, 174, 136)">
+    <tr>
+        <td><label>Table</label></td>
+        <td>
+            <select name="table_to_query" id="tableOptions" onchange="populateOptions();">
+                <option value="Book">None</option>
+                <option value="Book">Book</option>
+                <option value="Author">Author</option>
+                <option value="Patron">Patron</option>
+                <option value="Librarian">Librarian</option>
+                <option value="TransactionHistory">Transaction History</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td><label>Search Field</label></td>
+        <td>
+            <select name="search_field" id="field_id">       
+            <option>Auto</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td><label>Search Value</label></td>
+        <td><input type="text" name="search_field_value" size="25"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="Search"></td>
+    </tr>
+</table>
+</form>
+
+{% endblock %}

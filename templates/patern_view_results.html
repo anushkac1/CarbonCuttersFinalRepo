@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<a href="/" align="right">Home Page</a>
+<h1>Patron view</h2>
+    
+<table border="1" style="background-color:rgb(146, 109, 78)">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Age Demographic</th>  
+            <th>Author First Name</th>
+            <th>Author Last Name</th>       
+                       
+        </tr>
+    </thead>
+    
+        
+        {% for join in patronQuery %}
+        <tr>     
+            {% if Book == join[0].Book %}     
+            {% set bookview = join[0] %}
+                    <td>{{ bookview.isbn}}</td>
+                    <td>{{ bookview.title}}</td>  
+                    <td>{{ bookview.genre}}</td>    
+                    <td>{{ bookview.age_demographic}}</td>              
+            {% endif %}
+            {% if Author == join[1].Author %}     
+            {% set authorview = join[1] %}
+                <td>{{ authorview.authorFirstName }} </td>
+                <td>{{ authorview.authorLastName }}</td>
+                          
+             
+            {% endif %}           
+        
+               
+        </tr>
+        {% endfor %}                
+    
+</table>
+</h2>
+
+{% endblock %}

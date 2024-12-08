@@ -1,0 +1,125 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<a href="/" align="right">Home Page</a>
+{% for book in books %}  
+    <h2>Books</h2>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Age Demographic</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            
+           
+            
+            <tr>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.age_demographic }}</td>            
+                    
+            </tr>
+                     
+        </tbody>
+    </table> 
+    {% endfor %}  
+
+
+    {% for author in authors %}
+    <h2>Authors</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>ISBN</th>
+               
+                
+            </tr>
+        </thead>
+        <tbody>            
+           
+            <tr>
+                <td>{{ author.authorFirstName }} </td>
+                <td>{{ author.authorLastName }}</td>
+                <td>{{ author.isbn }}</td>        
+                 
+                    
+            </tr>
+                
+            
+        </tbody>
+    </table>
+    {% endfor %}  
+
+    {% for patron in patrons %}
+    <h2>Patrons</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <td>{{ patron.patronFirstName }} </td>
+                <td>{{ patron.patronLastName }}</td>
+                <td>{{ patron.patronEmail }}</td>  
+                <td>{{ patron.patronStreetl }}</td>  
+                <td>{{ patron.patronCity }}</td>  
+                <td>{{ patron.patronState }}</td>  
+                <td>{{ patron.patronCountry }}</td>   
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}  
+
+    {% for librarian in librarians %}
+    <h2>Librarian</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <td>{{ librarian.librarianFirstName }} </td>
+                <td>{{ librarian.librarianLastName }}</td>
+                <td>{{ librarian.librarianEmail }}</td>  
+                <td>{{ librarian.librarianStreetl }}</td>  
+                <td>{{ librarian.librarianCity }}</td>  
+                <td>{{ librarian.librarianState }}</td>  
+                <td>{{ librarian.librarianCountry }}</td>   
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}  
+
+
+    {% endblock %}
